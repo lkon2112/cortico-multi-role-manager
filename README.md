@@ -61,6 +61,19 @@ CORTICO_MANAGER_TEST_SOURCE=/path/to/Cortico npm test
 
 跨版本验证可同时设置 `CORTICO_MANAGER_TEST_OLD_SOURCE`。测试创建临时数据，不需要模型账号。当前实测平台为 macOS；Windows 进程管理分支尚未实机验证。
 
+### Cortico v0.2.13 的 macOS 测试问题
+
+验证未修改的官方版本时发现 7 项测试失败，归因与修复如下：
+
+| 问题 | 影响与修复 | 上游跟踪 |
+|---|---|---|
+| 进程名称变化导致实例锁误判（5 项） | macOS 下修改 `process.title` 后，存活进程可能被误判为退出，影响重复启动保护和部署状态。修复改用内核进程名识别。 | [Issue #390](https://github.com/Pal-AI-Lab/Cortico/issues/390) · [PR #392](https://github.com/Pal-AI-Lab/Cortico/pull/392) |
+| llama.cpp 测试硬编码 CPU 后端（2 项） | Apple Silicon macOS 使用 Metal，测试配置因此被拒绝。修复让两个测试选择平台默认后端，运行时代码不变。 | [Issue #391](https://github.com/Pal-AI-Lab/Cortico/issues/391) · [PR #393](https://github.com/Pal-AI-Lab/Cortico/pull/393) |
+
+管理器通过官方启动器启动普通 Node 进程，已分别对官方原版和应用两项修复的版本通过全部 17 项集成测试，涵盖登录、启动与重启、复制、定时运行和数据沿用。安装管理器无需先应用这些补丁。
+
+两项修复一起应用后，Cortico 在本机的全量测试为 5193 通过、7 跳过、0 失败。管理器不自动修改 Cortico；修复的合并与发布状态见上述上游链接。
+
 ## 界面预览
 
 演示使用空白角色。
