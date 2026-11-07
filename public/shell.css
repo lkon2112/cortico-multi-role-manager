@@ -1,0 +1,74 @@
+/* The independent rail surrounds the official page. It never selects inside an iframe. */
+:root{--switch-width:72px;--rail:240px}
+[hidden]{display:none!important}
+#app{height:100dvh;display:block}
+#switch-rail{position:fixed;inset:0 auto 0 0;width:var(--switch-width);display:flex;flex-direction:column;align-items:center;gap:12px;padding:16px 8px;background:var(--sheet-2);border-right:1px solid var(--line);z-index:30;overflow-y:auto}
+.switch-button{position:relative;display:flex;align-items:center;justify-content:center;width:48px;height:48px;flex:none;border-radius:14px;color:var(--ink-soft)}
+.switch-button:hover{background:var(--hover);text-decoration:none}
+.switch-button[aria-current=page]{background:var(--sheet);color:var(--accent);box-shadow:0 1px 5px #0000000a}
+.switch-button[aria-current=page]:before{content:'';position:absolute;left:-8px;width:3px;height:22px;border-radius:3px;background:var(--accent)}
+.switch-button>.icon{width:23px;height:23px}
+#manager-tab>.icon{transform:translateY(-1px)}
+.switch-button .rail-avatar-wrap{width:40px;height:40px;min-width:40px}
+.switch-button .rail-avatar{width:100%;height:100%;min-width:0}
+.switch-button .rail-avatar-fallback{font-size:16px}
+.switch-button .add-avatar{display:grid;place-items:center;color:var(--ink-soft)}
+.add-avatar .icon{width:20px;height:20px}
+.switch-divider{height:1px;width:28px;background:var(--line)}
+#role-tabs{display:flex;flex-direction:column;gap:12px}
+.status-dot{position:absolute;right:6px;bottom:6px;width:8px;height:8px;border-radius:50%;background:var(--ink-dim);border:2px solid var(--sheet-2)}
+.status-dot.running{background:var(--accent)}.status-dot.paused{background:#aa8033}.status-dot.error{background:var(--danger)}
+#manager-view{height:100%;margin-left:var(--switch-width)}
+#rail{left:var(--switch-width);width:var(--rail);background:var(--paper);border-right:1px solid var(--line)}
+#rail .brand{padding:22px 18px 32px}#rail .brand svg{max-width:190px;width:100%}
+#rail .navitem{padding:12px 16px;gap:12px;font-size:14px;margin:3px 8px;border-radius:10px}
+#main{margin-left:var(--rail);width:calc(100% - var(--rail));padding:34px clamp(20px,4vw,56px) 48px}
+.page-head{margin-bottom:26px}.page-head h1{font-size:26px}.page-head p{line-height:1.6}
+#native-view{margin-left:var(--switch-width);height:100%;display:flex;flex-direction:column;min-width:0}
+#frames{flex:1;min-height:0}#frames:has(+ #role-placeholder:not([hidden])){display:none}
+#frames iframe{width:100%;height:100%;border:0;display:block;background:var(--paper)}
+#role-placeholder{margin:auto;text-align:center;padding:24px}#role-placeholder p{margin:12px 0 24px}#role-placeholder .btn{margin:4px}
+.manager-sheet{border:1px solid var(--line)}.dialog{position:fixed;inset:0;margin:auto;border:1px solid var(--line);border-radius:14px;max-height:90dvh;overflow:auto}
+.password-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.password-actions{display:flex;align-items:center;gap:12px;margin-top:14px}
+.language-options{display:flex;flex-wrap:wrap;gap:10px}.appearance-form{display:flex;flex-wrap:wrap;gap:12px}.appearance-form .field{width:auto;min-width:140px}
+.form-sheet{gap:20px}.field{max-width:100%}.login-card h1{font-size:24px;margin-top:12px}.login-card button[type=submit]{margin-top:16px}
+@media(max-width:760px){
+ :root{--switch-width:0px;--rail:0px}
+ #switch-rail{inset:0 0 auto 0;width:100%;height:60px;flex-direction:row;padding:6px 10px;gap:8px;overflow-x:auto;overflow-y:hidden;border-right:0;border-bottom:1px solid var(--line)}
+ .switch-button{width:44px;height:44px}.switch-button[aria-current=page]:before{left:12px;right:12px;bottom:-6px;width:auto;height:3px}
+ .switch-divider{width:1px;height:26px;flex:none}#role-tabs{flex-direction:row;gap:8px;flex:none}
+ #manager-view,#native-view{margin:60px 0 0;height:calc(100dvh - 60px)}
+ #manager-view{display:flex;flex-direction:column}
+ #rail{position:static;width:100%;height:auto;flex:none;border-right:0;border-bottom:1px solid var(--line)}#rail .brand{display:none}
+ #rail nav.stack{scrollbar-width:none;display:flex;flex-direction:row;overflow-x:auto;padding:6px;gap:2px}#rail .navitem{flex:none;margin:0;padding:9px 10px;font-size:12px;white-space:nowrap}#rail .navicon{display:none}
+ #main{margin:0;width:100%;height:auto;flex:1;padding:24px 16px 36px;min-height:0;scrollbar-gutter:auto}
+ .page-head{align-items:flex-start;gap:12px}.page-head h1{font-size:23px}.page-head .btn{font-size:12px}.page-head p{font-size:12px}
+ .field-grid,.mode-grid,.check-grid,.password-fields{grid-template-columns:1fr}.form-sheet{padding:18px}.section-title{flex-wrap:wrap}
+ .history-settings{flex-wrap:wrap}.record-row{gap:12px;flex-wrap:wrap}.row-controls{margin-left:0}.record-pagination{flex-wrap:wrap;gap:8px}
+}
+
+.copy-help{margin:0;font-size:12px;line-height:1.6;color:var(--ink-dim)}
+.copy-data-notice{margin:0;border-left:2px solid var(--warn);overflow-wrap:anywhere}
+
+.copy-mode-switch{display:flex;flex-wrap:wrap;gap:12px 24px}
+.copy-mode-switch label{display:flex;flex-direction:row;align-items:center;gap:8px;font-weight:600}
+#selective-options{display:grid;gap:20px}
+.clone-review{display:grid;gap:14px;margin:16px 0}
+.clone-review h2{font-size:18px;margin:0}
+.clone-review p{margin:0}
+.review-worlds{display:grid;gap:12px}
+.review-world{display:flex;align-items:center;justify-content:space-between;gap:16px;border:1px solid var(--line);border-radius:12px;padding:16px}
+.review-world>div{min-width:0;overflow-wrap:anywhere}
+.review-world strong{margin-right:12px}
+.review-world ul{padding-left:18px;margin:8px 0;font-size:13px;color:var(--ink-soft);line-height:1.6}
+
+.review-heading,.review-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.review-heading{justify-content:space-between}
+
+.world-switch{display:flex;align-items:center;flex:none;width:40px;height:24px;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--ink-dim);cursor:pointer}
+.world-switch>span{width:16px;height:16px;border-radius:50%;background:white;transition:transform .15s}
+.world-switch[aria-checked=true]{background:var(--accent);border-color:var(--accent)}
+.world-switch[aria-checked=true]>span{transform:translateX(16px)}
+.world-switch:disabled{opacity:.45;cursor:not-allowed}
+.world-switch:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media(max-width:760px){.review-world{flex-direction:row;align-items:flex-start}.world-switch{margin-top:1px}}
